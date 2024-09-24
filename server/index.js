@@ -12,12 +12,16 @@ const app=express();
 const server=http.createServer(app);
 const io=socketio(server,{
     cors: {
-      origin: "https://chat-app-frontend-two-black.vercel.app/", // Frontend origin
+     origin: ['http://localhost:3000', 'https://chat-app-frontend-two-black.vercel.app'], // Frontend origin
       methods: ["GET", "POST"]
     }
   });
 app.use(router);
-app.use(cors());
+app.use(cors({
+origin: ['http://localhost:3000', 'https://chat-app-frontend-two-black.vercel.app'], // Allow these two origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+}));
 //Socket Connection
 io.on('connection',(socket)=>{
   console.log("We have a new connection!!!");
