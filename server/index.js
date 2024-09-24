@@ -4,6 +4,7 @@ const http=require('http');
 const router=require('./router');
 const {addUser,removeUser,getUser,getUsersInRoom}=require('./users');
 const { clearLine } = require('readline');
+const cors=require('cors');
 
 const PORT=process.env.PORT || 5000;
 
@@ -11,12 +12,12 @@ const app=express();
 const server=http.createServer(app);
 const io=socketio(server,{
     cors: {
-      origin: "http://localhost:3000", // Frontend origin
+      origin: "https://chat-app-frontend-two-black.vercel.app/", // Frontend origin
       methods: ["GET", "POST"]
     }
   });
 app.use(router);
-
+app.use(cors());
 //Socket Connection
 io.on('connection',(socket)=>{
   console.log("We have a new connection!!!");
