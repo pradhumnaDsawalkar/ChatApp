@@ -17,7 +17,7 @@ const Chat=()=>{
     const [message,setMessage]=useState('');
     const [messages,setMessages]=useState([]);
 
-    const ENDPOINT='localhost:5000';
+    const ENDPOINT='chat-app-khaki-nu.vercel.app';
 
     useEffect(()=>{
         const {name,room}=queryString.parse(location.search); //Converting the url into object format
