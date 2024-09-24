@@ -10,6 +10,13 @@ const PORT=process.env.PORT || 5000;
 
 const app=express();
 const server=http.createServer(app);
+
+app.use(cors({
+origin: ['http://localhost:3000', 'https://chat-app-frontend-two-black.vercel.app'], // Allow these two origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+}));
+
 const io=socketio(server,{
     cors: {
      origin: ['http://localhost:3000', 'https://chat-app-frontend-two-black.vercel.app'], // Frontend origin
@@ -17,11 +24,7 @@ const io=socketio(server,{
     }
   });
 app.use(router);
-app.use(cors({
-origin: ['http://localhost:3000', 'https://chat-app-frontend-two-black.vercel.app'], // Allow these two origins
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true,
-}));
+
 //Socket Connection
 io.on('connection',(socket)=>{
   console.log("We have a new connection!!!");
